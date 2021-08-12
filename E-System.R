@@ -445,7 +445,7 @@ graph8+scale_y_continuous(labels = scales::comma)+
                                          colour ="gray"))
 
 # Table for MAPE For counry
-best_recommended_model <- min(MAPE_Mean_All_NNAR,MAPE_Mean_All.bats_Model,MAPE_Mean_All.TBATS_Model,MAPE_Mean_All.Holt_Model,MAPE_Mean_All.ARIMA_Model)
+best_recommended_model <- min(MAPE_Mean_All_NNAR,MAPE_Mean_All.bats_Model,MAPE_Mean_All.TBATS_Model,MAPE_Mean_All.Holt_Model,MAPE_Mean_All.ARIMA_Model,MAPE_Mean_All.splinef_Model,MAPE_Mean_EnsemblingAverage,MAPE_Mean_EnsemblingAverage1)
 paste("System Choose Least Error ==> ( MAPE %) of Forecasting  by using NNAR model, BATS Model, TBATS Model, Holt's Linear Model , autoarima Model, cubic smoothing splines Model, Ensembling (Average), and Ensembling weight average  ,  for  ==> ", y_lab , sep=" ")
 best_recommended_model
 x1<-if(best_recommended_model >= MAPE_Mean_All.bats_Model) {paste("BATS Model")}
@@ -470,9 +470,10 @@ print(ascii(data.frame(FD,forecating_date=forecasting_data_by_name,forecasting_b
 paste("Forecasting by using cubic smoothing splines Model  ==> ", y_lab , sep=" ")
 print(ascii(data.frame(FD,forecating_date=forecasting_data_by_name,forecasting_splinef=tail(forecasting_splinef$mean,N_forecasting_days),Lower=tail(forecasting_splinef$lower,N_forecasting_days),Upper=tail(forecasting_splinef$upper,N_forecasting_days))), type = "rest")
 print(ascii(data.frame(FD,forecating_date=forecasting_data_by_name,forecasting_by_splinef=tail(forecasting_splinef$mean,N_forecasting_days),Lower=tail(forecasting_holt$lower,N_forecasting_days),Upper=tail(forecasting_holt$upper,N_forecasting_days))), type = "rest")
-result<-c(x1,x2,x3,x4,x5,x6)
+result<-c(x1,x2,x3,x4,x5,x6,x7,x8)
 table.error<-data.frame(country.name,NNAR.model=MAPE_Mean_All_NNAR, BATS.Model=MAPE_Mean_All.bats_Model,TBATS.Model=MAPE_Mean_All.TBATS_Model,Holt.Model=MAPE_Mean_All.Holt_Model,ARIMA.Model=MAPE_Mean_All.ARIMA_Model,cubic_smoothing.splines=MAPE_Mean_All.splinef_Model,Ensembling_Average=MAPE_Mean_EnsemblingAverage,Ensembling_weight=MAPE_Mean_EnsemblingAverage1,Best.Model=result)
-print(ascii(table(table.error)), type = "rest",beginline = 1)
+knitr::kable(table.error,caption = paste("Accuracy MAPE % daily Covid-19 infection cases for testing data last" , validation_data_days ,frequency, y_lab , sep=" "))
+
 MAPE.Value<-c(MAPE_Mean_All_NNAR,MAPE_Mean_All.bats_Model,MAPE_Mean_All.TBATS_Model,MAPE_Mean_All.Holt_Model,MAPE_Mean_All.ARIMA_Model,MAPE_Mean_All.splinef_Model,MAPE_Mean_EnsemblingAverage,MAPE_Mean_EnsemblingAverage1)
 Model<-c("NNAR model","BATS Model","TBATS Model","Holt Model","ARIMA Model","cubic smoothing splines","Ensembling (Average)","Ensembling weight")
 channel_data<-data.frame(Model,MAPE.Value)
