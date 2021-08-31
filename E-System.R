@@ -34,7 +34,7 @@ library(gridExtra)
 Full_original_data <- read_excel("data.xlsx") # path of your data ( time series data)
 original_data<-Full_original_data$Cases # select colum from your data 
 y_lab <- "(Daily Covid 19 Infection cases in Russia)"   # input name of data
-Actual_date_interval <- c("2020/03/01","2021/08/15") # put actual range date of your data
+Actual_date_interval <- c("2020/01/03","2021/08/15") # put actual range date of your data
 Forecast_date_interval <- c("2021/08/16","2021/08/31") #put forecasting date range 
 validation_data_days <-7 # Number of testing data(#testing last 10 days)10
 Number_Neural<-50# Number of Neural For model NNAR Model
